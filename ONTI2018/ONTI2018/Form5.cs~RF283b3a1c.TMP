@@ -1,0 +1,143 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO; 
+
+namespace ONTI2018
+{
+    public partial class Form5 : Form
+    {
+        public Form5()
+        {
+            InitializeComponent();
+        }
+
+        double distanta(int x1,int y1,int x2,int y2)
+        {
+            return Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+        }
+        Bitmap imgSuport;
+        string path = "";
+        Point[] puncte = new Point[76];
+        List<Point> pointList = new List<Point>();
+        Brush[] br = new Brush[11];
+        Point[] capitale = new Point[10];
+        Pen[] p = new Pen[10];
+        private void Form5_Load(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Form4.imgTraseu;
+            imgSuport = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            Graphics g = Graphics.FromImage(imgSuport);
+            g.Clear(Color.Azure);
+            path = System.IO.Directory.GetCurrentDirectory();
+            path += "\\Resurse_C#\\";
+            for (int i = 0; i < 10; i++)
+            {
+                br[i] = new SolidBrush(Color.FromArgb(i * 10, 0, 0));
+                p[i] = new Pen(br[i], 10);
+            }
+            StreamReader sr = new StreamReader(path + "\\Harti\\RomaniaMare.txt");
+            string line = "";
+            int ct = 0;
+            while ((line = sr.ReadLine()) != null)
+            {
+                puncte[ct].X = Convert.ToInt32(line.Split('*')[0]);
+                puncte[ct].Y = Convert.ToInt32(line.Split('*')[1]);
+                ct++;
+
+            }
+            g.DrawPolygon(Pens.Black, puncte);
+
+
+            //part 2 
+
+
+            int ctCapitale = 0;
+            int ct69 = 0;
+              sr = new StreamReader(path + "\\Harti\\RomaniaMare.txt");
+            for (int i = 0; i <= 10; i++)
+            {
+
+                 if (System.IO.Directory.GetFiles(path + "Harti")[i] != path + "Harti\\RomaniaMare.txt")
+                {
+                    sr = new StreamReader(System.IO.Directory.GetFiles(path + "Harti")[i]);
+                    string line1 = "";
+                    int xVechi = 0, yVechi = 0;
+                    int ctPct = 0;
+                    pointList.Clear();
+                    while ((line1 = sr.ReadLine()) != null)
+                    {
+                        if (ctPct != 0)
+                        {
+                            int x = Convert.ToInt32(line1.Split('*')[0]);
+                            int y = Convert.ToInt32(line1.Split('*')[1]);
+                            pointList.Add(new Point(x, y));
+                            if (xVechi != 0 & yVechi != 0)
+                                g.DrawLine(Pens.Black, xVechi, yVechi, x, y);
+                            xVechi = x; yVechi = y;
+                        }
+                        else
+                        {
+                            int x = Convert.ToInt32(line1.Split('*')[0]);
+                            int y = Convert.ToInt32(line1.Split('*')[1]);
+                            capitale[ctCapitale].X = x; capitale[ctCapitale].Y = y;
+                            ctCapitale++;
+                        }
+                        ctPct++;
+                       
+
+
+                    }
+                    Point[] pct = pointList.ToArray();
+                    g.FillPolygon(br[ct69], pct);
+                    ct69++;
+                }
+            }
+
+            pictureBox2.Image = imgSuport;
+        
+        
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Form4.imgTraseu;
+            int[] viz = new int[10];
+            for (int i = 0; i <= 9; i++) viz[i] = 0;
+            Bitmap imgDesen = new Bitmap(pictureBox1.Image);
+            Graphics g = Graphics.FromImage(imgDesen);
+            int x = 0; int y = 0;
+            MouseEventArgs me = (MouseEventArgs)e;
+            x = me.X; y = me.Y;
+            int regiuneStart = imgSuport.GetPixel(x, y).R / 10;
+            label1.Text = regiuneStart.ToString();
+            int punctActual = regiuneStart;
+            for (int j = 1; j <= 10; j++)
+            {
+                int punctMin = 0; double distanta1 = 100000;
+                for (int i = 0; i <= 9; i++)
+                {
+                    if (i != punctActual &viz[i]==0)
+                    {
+                        if (distanta(capitale[punctActual].X, capitale[punctActual].Y, capitale[i].X, capitale[i].Y) < distanta1)
+                        {
+                            punctMin = i; distanta1 = distanta(capitale[punctActual].X, capitale[punctActual].Y, capitale[i].X, capitale[i].Y);
+                        }
+                    }
+                }
+                viz[punctMin] = 1;
+                g.DrawLine(p[5], capitale[punctActual].X, capitale[punctActual].Y, capitale[punctMin].X, capitale[punctMin].Y);
+                punctActual = punctMin;
+            }
+            g.DrawLine(p[9], capitale[punctActual].X, capitale[punctActual].Y, capitale[regiuneStart].X, capitale[regiuneStart].Y);
+            pictureBox1.Image = imgDesen;
+
+        }
+    }
+}

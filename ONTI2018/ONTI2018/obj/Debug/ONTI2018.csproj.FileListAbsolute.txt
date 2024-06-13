@@ -1,0 +1,16 @@
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\bin\Debug\CentenarDB.mdf
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\bin\Debug\CentenarDB_log.ldf
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\bin\Debug\ONTI2018.exe.config
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\bin\Debug\ONTI2018.exe
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\bin\Debug\ONTI2018.pdb
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.csproj.AssemblyReference.cache
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.Form1.resources
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.Properties.Resources.resources
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.csproj.GenerateResource.cache
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.csproj.CoreCompileInputs.cache
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.exe
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.pdb
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.Form2.resources
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.Form3.resources
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.Form4.resources
+G:\C# Rezolvari\ONTI 2018\ONTI2018\ONTI2018\obj\Debug\ONTI2018.Form5.resources
